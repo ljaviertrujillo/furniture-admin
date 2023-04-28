@@ -1,0 +1,160 @@
+@import "../../styles/index.scss";
+
+.btn-theme {
+  font-size: 1rem;
+  font-weight: 600;
+  color: $PL-Dark;
+  width: 5.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  border-radius: 0.25rem;
+  padding: 0.25rem;
+  cursor: pointer;
+  text-align: left;
+  @include transition(background-color, box-shadow, color);
+
+  &.active {
+    color: $PD-main;
+    background-color: $PL-Light;
+  }
+}
+
+.btn-utility {
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+  color: $PD-main;
+}
+
+.arrow-btn {
+  cursor: pointer;
+  background-color: $P-200;
+  width: 2.5rem;
+  height: 2.5rem;
+  display: flex;
+  align-items: center;
+  font-size: 2rem;
+  padding: 0.5rem;
+  border-radius: 0.25rem;
+  color: $P-400;
+  @include transition(color, background-color, box-shadow);
+  &:hover {
+    color: $P-600;
+    background-color: $P-400;
+  }
+}
+
+.btn-secondary {
+  width: 100%;
+  cursor: pointer;
+  background-color: $P-600;
+  color: $P-100;
+  border-radius: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  gap: 0.5rem;
+  padding: 0.5rem 1.25rem;
+  font-size: 1rem;
+  @include transition(color, background-color, box-shadow);
+  &:hover {
+    background-color: $P-400;
+    color: $P-700;
+  }
+
+  &:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+    &:hover {
+      background-color: $P-600;
+      color: $P-100;
+      box-shadow: none;
+    }
+  }
+}
+
+.btn-primary {
+  width: 100%;
+  cursor: pointer;
+  background-color: $S-400;
+  color: $P-800;
+  border-radius: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  padding: 0.5rem 1.25rem;
+  font-size: 1rem;
+  @include transition(color, background-color, box-shadow);
+  &:hover {
+    background-color: $S-200;
+    color: $P-600;
+  }
+}
+
+.complementary-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  border-radius: 0.25rem;
+  padding: 0.25rem;
+  background-color: $C-100;
+  color: $P-600;
+  user-select: none;
+}
+
+.confirm-btn {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: calc(15% + 0.5rem);
+  height: 100%;
+  padding-left: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  background-color: $P-900;
+  border-radius: 0 0.5rem 0.5rem 0;
+  z-index: 1;
+  .btn,
+  .close,
+  .check {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 100%;
+    color: $P-400;
+    font-size: 1.5rem;
+    @include transition(color, box-shadow);
+  }
+
+  .close {
+    &:hover {
+      color: tomato;
+    }
+  }
+  .check {
+    &:hover {
+      color: $C-500;
+    }
+  }
+
+  .btn {
+    &.edit {
+      &:hover {
+        color: $S-700;
+      }
+    }
+    &.trash {
+      &:hover {
+        color: tomato;
+      }
+    }
+  }
+}

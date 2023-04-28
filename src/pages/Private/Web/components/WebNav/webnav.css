@@ -1,0 +1,154 @@
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #242424;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    color: #213547;
+    background-color: #ffffff;
+  }
+  a:hover {
+    color: #747bff;
+  }
+}
+*,
+body {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #EFF1F0;
+  min-height: 100vh;
+  color: #444645;
+}
+
+button {
+  cursor: pointer;
+  background-color: transparent;
+  border: none;
+  transition: box-shadow 0.3s ease-in-out;
+}
+button:hover {
+  box-shadow: 0 0 0.75rem #BFC1C0;
+}
+
+a {
+  text-decoration: none;
+}
+
+li {
+  list-style: none;
+}
+
+h1 {
+  color: #232524;
+  font-size: 2rem;
+  padding: 0.25rem 0;
+  margin: 0;
+}
+
+h2 {
+  color: #444645;
+  font-size: 1.75rem;
+  font-weight: 400;
+}
+
+h3 {
+  color: #535654;
+  font-size: 1.25rem;
+}
+
+p {
+  color: #777978;
+}
+
+select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+select::-ms-expand {
+  display: none;
+}
+
+::-webkit-scrollbar {
+  width: 0.5rem;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #777978;
+  border-radius: 0.25rem;
+}
+::-webkit-scrollbar-thumb:hover {
+  background-color: #BFC1C0;
+}
+
+.web-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 6rem;
+  height: 100vh;
+  background-color: #F4F6F5;
+  border-right: 1px solid #BFC1C0;
+  z-index: 3;
+  transition: box-shadow 0.3s ease-in-out;
+}
+.web-nav .web-header {
+  height: 10vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.web-route-link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 2rem 0;
+  background: none;
+  transition: background 0.3s ease-in-out;
+}
+.web-route-link.active {
+  background: linear-gradient(90deg, #BFC1C0 0%, transparent 80%);
+}
+.web-route-link.active .web-active-bar {
+  background-color: #2C64FE;
+}
+.web-route-link.active .web-route {
+  color: #2C64FE;
+}
+.web-route-link .web-active-bar {
+  height: 4rem;
+  width: 0.25rem;
+  border-radius: 0.125rem;
+  background-color: transparent;
+  transition: background-color 0.3s ease-in-out;
+}
+.web-route-link .web-route {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #BFC1C0;
+  transition: color 0.3s ease-in-out;
+}
+.web-route-link .web-route .web-icon {
+  font-size: 2rem;
+}
+.web-route-link .web-route .web-label {
+  font-size: 0.75rem;
+}/*# sourceMappingURL=webnav.css.map */

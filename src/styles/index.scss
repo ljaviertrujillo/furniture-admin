@@ -1,0 +1,152 @@
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #242424;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    color: #213547;
+    background-color: #ffffff;
+  }
+  a:hover {
+    color: #747bff;
+  }
+}
+
+@mixin transition($value1, $value2: null, $value3: null) {
+  $time: 0.3s;
+  $transitionList: ();
+  @if $value3 != null {
+    $transitionList: (
+      $value1 $time ease-in-out,
+      $value2 $time ease-in-out,
+      $value3 $time ease-in-out
+    );
+  } @else if $value2 != null {
+    $transitionList: ($value1 $time ease-in-out, $value2 $time ease-in-out);
+  } @else {
+    $transitionList: ($value1 $time ease-in-out);
+  }
+  transition: $transitionList;
+}
+
+$PD-main: #444645;
+$PD-Light: #636564;
+$PD-Dark: #232524;
+$PL-main: #e2e4e3;
+$PL-Light: #f4f6f5;
+$PL-Dark: #a1a3a2;
+$P-100: #F4F6F5;
+$P-200: #EFF1F0;
+$P-300: #E2E4E3;
+$P-400: #BFC1C0;
+$P-500: #A1A3A2;
+$P-600: #777978;
+$P-700: #535654;
+$P-800: #444645;
+$P-900: #232524;
+$C-100: #C3C8FE;
+$C-200: #97A5FE;
+$C-300: #6381FF;
+$C-400: #2C64FE;
+$C-500: #0046FB;
+$C-600: #003DEF;
+$C-700: #0032E2;
+$C-800: #0025D8;
+$C-900: #0007BF;
+$S-100: #FFEAB3;
+$S-200: #FFDD82;
+$S-300: #FED150;
+$S-400: #FEC62C;
+$S-500: #FCBD13;
+$S-600: #FDAF0F;
+$S-700: #FD9C0F;
+$S-800: #FC8B0F;
+$S-900: #FB6C0D;
+
+*,
+body {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: $P-200;
+  min-height: 100vh;
+  color: $P-800;
+}
+
+button {
+  cursor: pointer;
+  background-color: transparent;
+  border: none;
+  @include transition(box-shadow);
+
+  &:hover{
+    box-shadow: 0 0 .75rem $P-400;
+  }
+}
+
+a {
+  text-decoration: none;
+}
+
+li {
+  list-style: none;
+}
+
+h1 {
+  color: $P-900;
+  font-size: 2rem;
+  padding: 0.25rem 0;
+  margin: 0;
+}
+
+h2 {
+  color: $P-800;
+  font-size: 1.75rem;
+  font-weight: 400;
+}
+
+h3 {
+  color: $P-700;
+  font-size: 1.25rem;
+}
+
+p {
+  color: $P-600;
+}
+
+select{
+  appearance: none;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+
+  &::-ms-expand {
+    display: none;
+}
+}
+
+::-webkit-scrollbar{
+  width: .5rem;
+}
+
+::-webkit-scrollbar-thumb{
+  background-color: $P-600;
+  border-radius: .25rem;
+  &:hover{
+    background-color: $P-400;
+  }
+}

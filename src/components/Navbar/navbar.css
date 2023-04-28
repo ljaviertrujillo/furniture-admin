@@ -1,0 +1,135 @@
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #242424;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    color: #213547;
+    background-color: #ffffff;
+  }
+  a:hover {
+    color: #747bff;
+  }
+}
+*,
+body {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #EFF1F0;
+  min-height: 100vh;
+  color: #444645;
+}
+
+button {
+  cursor: pointer;
+  background-color: transparent;
+  border: none;
+  transition: box-shadow 0.3s ease-in-out;
+}
+button:hover {
+  box-shadow: 0 0 0.75rem #BFC1C0;
+}
+
+a {
+  text-decoration: none;
+}
+
+li {
+  list-style: none;
+}
+
+h1 {
+  color: #232524;
+  font-size: 2rem;
+  padding: 0.25rem 0;
+  margin: 0;
+}
+
+h2 {
+  color: #444645;
+  font-size: 1.75rem;
+  font-weight: 400;
+}
+
+h3 {
+  color: #535654;
+  font-size: 1.25rem;
+}
+
+p {
+  color: #777978;
+}
+
+select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+select::-ms-expand {
+  display: none;
+}
+
+::-webkit-scrollbar {
+  width: 0.5rem;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #777978;
+  border-radius: 0.25rem;
+}
+::-webkit-scrollbar-thumb:hover {
+  background-color: #BFC1C0;
+}
+
+.nav {
+  position: relative;
+}
+.nav .nav-content {
+  position: fixed;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 3rem;
+  top: 0;
+  left: 6rem;
+  right: 0;
+  z-index: 1;
+  padding: 0 1rem;
+  transition: left 0.3s ease-in-out;
+}
+.nav .nav-content.collapsed {
+  left: 36rem;
+}
+.nav .nav-content .nav-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.nav .nav-content .footer {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.nav .nav-content .footer .utilities {
+  display: flex;
+  gap: 1rem;
+}
+.nav .nav-content .page-label {
+  color: #444645;
+  font-size: 1.5rem;
+  font-weight: 800;
+}/*# sourceMappingURL=navbar.css.map */

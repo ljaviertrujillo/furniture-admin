@@ -1,0 +1,63 @@
+@import '../../../../../styles/index.scss';
+
+.web-nav{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 6rem;
+    height: 100vh;
+    background-color: $P-100;
+    border-right: 1px solid $P-400;
+    z-index: 3;
+    @include transition(box-shadow);
+    .web-header{
+        height: 10vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+}
+
+.web-route-link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 2rem 0;
+  background: none;
+  @include transition(background);
+
+  &.active{
+    background: linear-gradient(90deg, $P-400 0%, transparent 80%);
+    .web-active-bar{
+      background-color: $C-400;
+    }
+    .web-route{
+      color: $C-400;
+    }
+
+  }
+  .web-active-bar{
+    height: 4rem;
+    width: .25rem;
+    border-radius: .125rem;
+    background-color: transparent;
+    @include transition(background-color);
+  }
+  .web-route{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: $P-400;
+    @include transition(color);
+    .web-icon{
+      font-size: 2rem ;
+      
+    }
+    .web-label{
+      font-size: .75rem;
+    }
+  }
+
+  }

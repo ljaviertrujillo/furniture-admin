@@ -1,0 +1,53 @@
+@import "../../styles/index.scss";
+.user-options {
+  padding: 0.5rem;
+  background-color: $PL-Light;
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  border-radius: 0.5rem;
+  box-shadow: 0 0 1rem rgba($PL-Dark, 0.5);
+  top: 3rem;
+  right: 1rem;
+  height: auto;
+  transition: all 0.3s ease-in-out;
+  background-color: $PL-Light;
+  visibility: hidden;
+  opacity: 0;
+  z-index: 2;
+  &.expanded {
+    opacity: 1;
+    transform-origin: top right;
+    transform: translate3d(-1rem, 0.5rem, 0);
+    visibility: visible;
+    .options {
+      width: 100%;
+    }
+  }
+
+  .options {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 0.75rem;
+    border-top: 1px solid $PL-Light;
+    &.utilities {
+      display: none;
+    }
+  }
+}
+
+.theme-options {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: .5rem;
+    .themes {
+      border-radius: .375rem;
+    display: flex;
+    justify-content: center;
+    gap: 0.25rem;
+    background-color: $PL-main;
+    padding: 0.25rem;
+  }
+}

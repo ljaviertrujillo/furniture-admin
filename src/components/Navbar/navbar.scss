@@ -1,0 +1,43 @@
+@import '../../styles/index.scss';
+
+.nav {
+    position: relative;
+    .nav-content {
+      position: fixed;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 3rem;
+      top: 0;
+      left: 6rem;
+      right: 0;
+      z-index: 1;
+      padding: 0 1rem;
+      @include transition(left);
+
+      &.collapsed{
+        left: 36rem;
+      }
+      .nav-header {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+      }
+      .footer {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        .utilities {
+          display: flex;
+          gap: 1rem;
+        }
+      }
+  
+      .page-label {
+        color: $PD-main;
+        font-size: 1.5rem;
+        font-weight: 800;
+      }
+    }
+
+  }

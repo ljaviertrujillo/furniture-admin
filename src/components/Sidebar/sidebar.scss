@@ -1,0 +1,79 @@
+@import "../../styles/index.scss";
+
+.sidebar {
+  position: fixed;
+  width: 6rem;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  background-color: $P-100;
+  @include transition(width);
+  z-index: 2;
+  border-right: 1px solid $P-400;
+  &:hover {
+    width: 14rem;
+    box-shadow: 0 0 1rem $P-300;
+    .route {
+      width: 9rem;
+    }
+  }
+
+  .logo {
+    height: 10vh;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+  }
+  .routes {
+    height: 90vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+}
+
+.route-link {
+  display: flex;
+  align-items: center;
+  margin: 2rem 0;
+  gap: calc((5rem - 2rem) / 2);
+  &.active {
+    background: linear-gradient(90deg, $PL-main 0%, transparent 100%);
+    .active-bar {
+      background-color: $S-600;
+    }
+    .route {
+      color: $S-600;
+    }
+  }
+  .active-bar {
+    height: 3rem;
+    width: 0.25rem;
+    border-radius: 0.125rem;
+    background-color: transparent;
+    @include transition(color);
+  }
+  .route {
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    text-align: left;
+    white-space: nowrap;
+    gap: 0.5rem;
+    width: 2.5rem;
+    color: $P-500;
+    transition: all 0.2s ease-in-out;
+    &:hover {
+      color: $S-600;
+    }
+    .label {
+      width: 0;
+      font-size: 1rem;
+      font-weight: 500;
+      @include transition(width);
+    }
+    .icon {
+      font-size: 2rem;
+    }
+  }
+}

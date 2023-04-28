@@ -1,0 +1,18 @@
+@import '../../styles/index.scss';
+
+.category-form{
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+}
+
+.product-form{
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+
+    .dimensions{
+        display: flex;
+        gap: .5rem;
+    }
+}
