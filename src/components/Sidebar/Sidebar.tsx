@@ -2,13 +2,13 @@ import "./sidebar.scss";
 
 import { useContext } from "react";
 import { classNames } from "../../utilities";
-import { PageContext } from "../../context/PageContext";
+import { AppContext } from "../../context/AppContext";
 import CloseButton from "../Button/CloseButton";
 import { features, settings } from "../../models";
 import SidebarItemView from "./SidebarItemView";
 
 export default function Sidebar() {
-  const { sidebarOpen, setSidebarOpen } = useContext(PageContext);
+  const { sidebarOpen, setSidebarOpen } = useContext(AppContext);
 
   return (
     <aside className={classNames("sidebar", sidebarOpen ? "expanded" : "")}>

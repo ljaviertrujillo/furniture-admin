@@ -1,16 +1,16 @@
 import { ReactNode, createContext } from "react";
 import { useDispatch } from "react-redux";
 import { addBenefit, removeBenefit } from "../../redux/states/benefits";
-import { IBenefit } from "../../models";
+import { Benefit } from "../../models";
 
 interface BenefitContextProps {
-  newBenefit: (benefit: IBenefit) => void;
-  deleteBenefit: (benefit: IBenefit) => void;
+  newBenefit: (benefit: Benefit) => void;
+  deleteBenefit: (benefit: Benefit) => void;
 }
 
 export const BenefitContext = createContext<BenefitContextProps>({
-  newBenefit: function (benefit: IBenefit): void {},
-  deleteBenefit: function (benefit: IBenefit): void {},
+  newBenefit: function (benefit: Benefit): void {},
+  deleteBenefit: function (benefit: Benefit): void {},
 });
 
 export default function BenefitContextProvider({
@@ -20,11 +20,11 @@ export default function BenefitContextProvider({
 }) {
   const dispatch = useDispatch();
 
-  const newBenefit = (benefit: IBenefit) => {
+  const newBenefit = (benefit: Benefit) => {
     dispatch(addBenefit(benefit));
   };
 
-  const deleteBenefit = (benefit: IBenefit) => {
+  const deleteBenefit = (benefit: Benefit) => {
     dispatch(removeBenefit(benefit.id));
   };
 

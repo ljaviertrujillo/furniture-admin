@@ -8,13 +8,13 @@ import { ButtonType } from "../Button/UtilityButton";
 import { BsBell, BsCalendar3 } from "react-icons/bs";
 import User from "../Button/User";
 import { useContext } from "react";
-import { PageContext } from "../../context/PageContext";
+import { AppContext } from "../../context/AppContext";
 import BackButton from "../Button/BackButton";
 import { WebContext } from "../../context/Web/WebContext";
 import { classNames } from "../../utilities";
 
 export default function Navbar() {
-  const { userOptions, setUserOptions } = useContext(PageContext);
+  const { userOptions, setUserOptions } = useContext(AppContext);
   const { isOpen } = useContext(WebContext);
   const location = useLocation();
   const profileLabel = "Profile";

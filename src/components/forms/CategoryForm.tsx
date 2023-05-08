@@ -1,5 +1,5 @@
 import "./forms.scss";
-import { ICategory } from "../../models";
+import { Category } from "../../models";
 import * as Yup from "yup";
 import { Formik, Form, ErrorMessage } from "formik";
 import { InputImageField, InputTextField, TextAreaField } from "./Input";
@@ -7,21 +7,24 @@ import { SecondaryButton } from "../Button";
 import { TypeButton } from "../Button/SecondaryButton";
 import { useContext, useState } from "react";
 import { CategoriesContext } from "../../context/Web/CategoriesContext";
-import { v4 } from "uuid";
 import { uploadTempFile } from "../../services/firebase/ImageController";
+import { useSelector } from "react-redux";
+import { AppStore } from "../../redux/store";
+import { validateID } from "../../utilities";
 
 export default function CategoryForm({ onClose }: { onClose: () => void }) {
   const [urlsReady, setUrlsReady] = useState(false);
   const { newCategory } = useContext(CategoriesContext);
   const [urls, setUrls] = useState<string[]>([]);
+  const categories = useSelector((state: AppStore) => state.category.data);
 
-  const initialValues: ICategory = {
+  const initialValues: Category = {
     id: "",
     title: "",
     description: "",
     image: "",
-    subCategories: [],
-    url: "",
+    isNew: true,
+    isUpdated: false,
   };
 
   const categorySchema = Yup.object().shape({
@@ -48,13 +51,13 @@ export default function CategoryForm({ onClose }: { onClose: () => void }) {
       initialValues={initialValues}
       validationSchema={categorySchema}
       onSubmit={(values, { resetForm }) => {
-        const category: ICategory = {
-          id: v4(),
+        const category: Category = {
+          id: validateID<Category>({ items: categories }),
           title: values.title,
           description: values.description,
           image: urls[0] || "",
-          subCategories: [],
-          url: `/categories/${values.title.toLowerCase()}`,
+          isNew: true,
+          isUpdated: false,
         };
         resetForm();
         newCategory(category);

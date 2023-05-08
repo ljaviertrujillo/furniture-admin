@@ -4,9 +4,8 @@ import { Route, useMatch } from "react-router-dom";
 import { PrivateRoutes } from "../../models";
 import { RoutesWithNotFound, classNames } from "../../utilities";
 import { Navbar, Sidebar } from "../../components";
-import { PageContext } from "../../context/PageContext";
+import { AppContext } from "../../context/AppContext";
 import AdminGuard from "../../guards/admin.guard";
-import GalleryContextProvider from "../../context/GalleryContext";
 import WebContextProvider from "../../context/Web/WebContext";
 
 const Home = lazy(() => import("./Home/Home"));
@@ -17,7 +16,7 @@ const Web = lazy(() => import("./Web/Web"));
 const Gallery = lazy(() => import("./Gallery/Gallery"));
 
 export default function Private() {
-  const { sidebarOpen } = useContext(PageContext);
+  const { sidebarOpen } = useContext(AppContext);
   const webMatch = useMatch("/web/*");
   return (
     <WebContextProvider>

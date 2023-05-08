@@ -1,6 +1,6 @@
 import { Formik, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
-import { IPrincipal } from "../../models/principal.model";
+import { Principal } from "../../models/principal.model";
 import { InputImageField, InputTextField, TextAreaField } from "./Input";
 import { SecondaryButton } from "../Button";
 import { TypeButton } from "../Button/SecondaryButton";
@@ -13,10 +13,14 @@ export default function PrincipalForm({ onClose }: { onClose: () => void }) {
   const [urlsReady, setUrlsReady] = useState(false);
   const { newPrincipal } = useContext(PrincipalContext);
 
-  const initialValues: IPrincipal = {
+  const initialValues: Principal = {
     title: "",
     slogan: "",
     image: "",
+    "logo-s": "",
+    "logo-l": "",
+    isNew: true,
+    isUpdated: false,
   };
 
   const principalSchema = Yup.object().shape({
@@ -38,10 +42,14 @@ export default function PrincipalForm({ onClose }: { onClose: () => void }) {
       initialValues={initialValues}
       validationSchema={principalSchema}
       onSubmit={(values, { resetForm }) => {
-        const principal: IPrincipal = {
+        const principal: Principal = {
           title: values.title,
           slogan: values.slogan,
           image: urls[0] || "",
+          "logo-s": "",
+          "logo-l": "",
+          isNew: true,
+          isUpdated: false,
         };
         resetForm();
         newPrincipal(principal);

@@ -1,32 +1,36 @@
-import { Dispatch, ReactNode, SetStateAction, createContext, useState } from "react"
-import { useDispatch } from "react-redux"
+import { ReactNode, createContext } from "react";
+import { useDispatch } from "react-redux";
 import { addProject, removeProject } from "../../redux/states/projects";
-import { IProject } from "../../models";
+import { Project } from "../../models";
 
 interface ProjectsContextProps {
-    newProject: (project: IProject) => void;
-    deleteProject: (project: IProject) => void;
+  newProject: (project: Project) => void;
+  deleteProject: (project: Project) => void;
 }
 
 export const ProjectContext = createContext<ProjectsContextProps>({
-    newProject: function (project: IProject): void {},
-    deleteProject: function (project: IProject): void {},
-})
+  newProject: function (project: Project): void {},
+  deleteProject: function (project: Project): void {},
+});
 
-export default function ProjectsContextProvider({children}: {children: ReactNode}) {
-    const dispatch = useDispatch();
+export default function ProjectsContextProvider({
+  children,
+}: {
+  children: ReactNode;
+}) {
+  const dispatch = useDispatch();
 
-    const newProject = (project: IProject) => {
-        dispatch( addProject(project) )
-    }
+  const newProject = (project: Project) => {
+    dispatch(addProject(project));
+  };
 
-    const deleteProject = (project: IProject) => {
-        dispatch(removeProject(project.id))
-    }
+  const deleteProject = (project: Project) => {
+    dispatch(removeProject(project.id));
+  };
 
   return (
     <ProjectContext.Provider value={{ newProject, deleteProject }}>
-        {children}
+      {children}
     </ProjectContext.Provider>
-  )
+  );
 }

@@ -1,24 +1,15 @@
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import ConfigAside from "../components/ConfigAside/ConfigAside";
 import "./principal.scss";
 import { classNames } from "../../../../utilities";
-import { BsArrowUpRight, BsThreeDotsVertical } from "react-icons/bs";
+import { BsArrowUpRight } from "react-icons/bs";
 import { useSelector } from "react-redux";
 import { AppStore } from "../../../../redux/store";
 import PrincipalForm from "../../../../components/forms/PrincipalForm";
-import { ComplementaryButton } from "../../../../components";
+import { Card, ComplementaryButton } from "../../../../components";
 import { VscAdd, VscClose } from "react-icons/vsc";
-import ConfirmButton from "../../../../components/Button/ConfirmButton";
-import { Card } from "../Card";
-import {WebContext} from '../../../../context/Web/WebContext'
+import { WebContext } from "../../../../context/Web/WebContext";
 import { PrincipalContext } from "../../../../context/Web/PrincipalContext";
-
-
-
-export interface imageProp {
-  url: string;
-  selected: boolean;
-}
 
 export default function Principal() {
   const { isOpen, setIsOpen, isFormVisible, setIsFormVisible } =
@@ -33,13 +24,17 @@ export default function Principal() {
     const { removePrincipal } = useContext(PrincipalContext);
     return (
       <>
-        {principal.title === "NOMBRE DE TU EMPRESA" || principal.title === '' ? (
+        {principal.title === "NOMBRE DE TU EMPRESA" ||
+        principal.title === "" ? (
           <p>Configura el inicio de tu Pagina</p>
         ) : (
           <div className="items">
-            <Card title={principal.title} description={principal.slogan} 
-            image={principal.image}
-            handleRemove={() => removePrincipal() } />
+            <Card
+              title={principal.title}
+              description={principal.slogan}
+              image={principal.image}
+              handleRemove={() => removePrincipal()}
+            />
           </div>
         )}
         <ComplementaryButton
@@ -63,7 +58,7 @@ export default function Principal() {
       />
 
       <div className="preview-container" onClick={() => setIsOpen(false)}>
-        <section className="preview">
+        <section className="preview preview-home">
           <div className="info">
             <h1 className="company-title">{principal.title}</h1>
             <h2 className="company-slogan">{principal.slogan}</h2>

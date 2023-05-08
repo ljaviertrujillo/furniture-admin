@@ -1,16 +1,20 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { IUser } from "../models";
+import { User } from "../models";
+import { Principal } from "../models/principal.model";
 import userReducer from "./states/user";
-import categoryReducer, { CategoryState } from "./states/categories";
-import { IPrincipal } from "../models/principal.model";
 import principalReducer from "./states/principal";
+import categoryReducer, { CategoryState } from "./states/categories";
 import projectReducer, { ProjectState } from "./states/projects";
 import benefitReducer, { BenefitState } from "./states/benefits";
+import subCategoryReducer, { SubCategoryState } from "./states/subcategories";
+import productReducer, { ProductState } from "./states/products";
 
 export interface AppStore {
-  user: IUser;
-  principal: IPrincipal;
+  user: User;
+  principal: Principal;
   category: CategoryState;
+  subCategory: SubCategoryState;
+  product: ProductState;
   project: ProjectState;
   benefit: BenefitState;
 }
@@ -20,6 +24,8 @@ export default configureStore<AppStore>({
     user: userReducer,
     principal: principalReducer,
     category: categoryReducer,
+    subCategory: subCategoryReducer,
+    product: productReducer,
     project: projectReducer,
     benefit: benefitReducer,
   },

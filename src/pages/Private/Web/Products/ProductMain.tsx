@@ -1,15 +1,15 @@
 import { useContext, useState } from "react";
 import {
+  Card,
   ComplementaryButton,
   ProductsForm,
   Select,
-} from "../../../../../components";
-import { ICategory, ISubCategory } from "../../../../../models";
+} from "../../../../components";
+import { Category, SubCategory } from "../../../../models";
 import { useSelector } from "react-redux";
-import { AppStore } from "../../../../../redux/store";
+import { AppStore } from "../../../../redux/store";
 import { VscAdd, VscClose } from "react-icons/vsc";
-import { Card } from "../Card";
-import { ProductContext } from "../../../../../context/Web/ProductsContext";
+import { ProductContext } from "../../../../context/Web/ProductsContext";
 
 export default function ProductsMain() {
   const {
@@ -21,11 +21,15 @@ export default function ProductsMain() {
   } = useContext(ProductContext);
   const [formVisible, setFormVisible] = useState<boolean>(false);
   const categories = useSelector((state: AppStore) => state.category.data);
+  const subCategories = useSelector(
+    (state: AppStore) => state.subCategory.data
+  );
+  const products = useSelector((state: AppStore) => state.product.data);
 
   const handleCategoryIndex = (value: number) => {
     setCategoryIndex(value);
     setFormVisible(false);
-    setSubCategoryIndex(0)
+    setSubCategoryIndex(0);
   };
 
   const handleSubCategoryIndex = (value: number) => {
@@ -37,20 +41,20 @@ export default function ProductsMain() {
     <>
       {categories.length > 0 ? (
         <>
-          <Select<ICategory>
+          <Select<Category>
             name="categories"
             label="Categorias"
             index={categoryIndex}
             options={categories}
             onChange={handleCategoryIndex}
           />
-          {categories[categoryIndex].subCategories.length > 0 ? (
+          {subCategories.length > 0 ? (
             <>
-              <Select<ISubCategory>
+              <Select<SubCategory>
                 name="subCategories"
                 label="SubCategorias"
                 index={subCategoryIndex}
-                options={categories[categoryIndex].subCategories}
+                options={subCategories.filter(subCategory => subCategory.categoryId === categories[categoryIndex].id)}
                 onChange={handleSubCategoryIndex}
               />
               <ComplementaryButton
@@ -60,9 +64,7 @@ export default function ProductsMain() {
               />
               {formVisible ? (
                 <ProductsForm
-                  subCategory={
-                    categories[categoryIndex].subCategories[subCategoryIndex]
-                  }
+                  subCategory={subCategories[subCategoryIndex]}
                   onClose={() => setFormVisible(false)}
                 />
               ) : null}
@@ -71,21 +73,20 @@ export default function ProductsMain() {
             <p>Agrega una subcategoria</p>
           )}
           {categories.length > 0 &&
-          categories[categoryIndex].subCategories.length > 0 &&
-          categories[categoryIndex].subCategories[subCategoryIndex].products
-            .length > 0 ? (
+          subCategories.length > 0 &&
+          products.length > 0 ? (
             <div className="cards">
-              {categories[categoryIndex].subCategories[
-                subCategoryIndex
-              ].products.map((product) => (
-                <Card
-                  key={product.id}
-                  title={product.title}
-                  description={product.description}
-                  image={product.images[0]}
-                  handleRemove={() => deleteProduct(product)}
-                />
-              ))}
+              {products
+                .filter((product) => product.subCategoryId === subCategories[subCategoryIndex].id)
+                .map((product) => (
+                  <Card
+                    key={product.id}
+                    title={product.title}
+                    description={product.description}
+                    image={product.images[0]}
+                    handleRemove={() => deleteProduct(product)}
+                  />
+                ))}
             </div>
           ) : null}
         </>

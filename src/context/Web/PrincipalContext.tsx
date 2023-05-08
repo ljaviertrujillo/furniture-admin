@@ -1,18 +1,22 @@
 import { ReactNode, createContext } from "react";
 import { useDispatch } from "react-redux";
-import { createPrincipal, resetPrincipal, updatePrincipal } from "../../redux/states/principal";
-import { IPrincipal } from "../../models/principal.model";
+import {
+  createPrincipal,
+  resetPrincipal,
+  updatePrincipal,
+} from "../../redux/states/principal";
+import { Principal } from "../../models/principal.model";
 
 interface PrincipalContextProps {
-  newPrincipal: (principal: IPrincipal) => void;
-  updatedPrincipal: (principal: IPrincipal) => void;
-  removePrincipal: () => void
+  newPrincipal: (principal: Principal) => void;
+  updatedPrincipal: (principal: Principal) => void;
+  removePrincipal: () => void;
 }
 
 export const PrincipalContext = createContext<PrincipalContextProps>({
-  newPrincipal: function (principal: IPrincipal): void {},
-  updatedPrincipal: function (principal: IPrincipal): void {},
-  removePrincipal: function (): void {}
+  newPrincipal: function (principal: Principal): void {},
+  updatedPrincipal: function (principal: Principal): void {},
+  removePrincipal: function (): void {},
 });
 
 export default function PrincipalContextProvider({
@@ -22,20 +26,22 @@ export default function PrincipalContextProvider({
 }) {
   const dispatch = useDispatch();
 
-  const newPrincipal = (principal: IPrincipal) => {
+  const newPrincipal = (principal: Principal) => {
     dispatch(createPrincipal(principal));
   };
 
-  const updatedPrincipal = (principal: IPrincipal) => {
+  const updatedPrincipal = (principal: Principal) => {
     dispatch(updatePrincipal(principal));
   };
 
   const removePrincipal = () => {
-    dispatch(resetPrincipal())
-  }
+    dispatch(resetPrincipal());
+  };
 
   return (
-    <PrincipalContext.Provider value={{ newPrincipal, updatedPrincipal, removePrincipal }}>
+    <PrincipalContext.Provider
+      value={{ newPrincipal, updatedPrincipal, removePrincipal }}
+    >
       {children}
     </PrincipalContext.Provider>
   );

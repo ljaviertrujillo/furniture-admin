@@ -1,6 +1,6 @@
 import * as Yup from "yup";
 import { Formik, Form, ErrorMessage } from "formik";
-import { IProduct, ISubCategory } from "../../models";
+import { Product, SubCategory } from "../../models";
 import { useContext, useState } from "react";
 import {
   InputImageField,
@@ -11,22 +11,25 @@ import {
 } from "./Input";
 import { SecondaryButton } from "../Button";
 import { TypeButton } from "../Button/SecondaryButton";
-import { v4 } from "uuid";
 import { uploadTempFile } from "../../services/firebase/ImageController";
 import { ProductContext } from "../../context/Web/ProductsContext";
+import { validateID } from "../../utilities";
+import { useSelector } from "react-redux";
+import { AppStore } from "../../redux/store";
 
 export default function ProductsForm({
   subCategory,
   onClose,
 }: {
-  subCategory: ISubCategory;
+  subCategory: SubCategory;
   onClose: () => void;
 }) {
   const [urls, setUrls] = useState<string[]>([]);
   const [urlsReady, setUrlsReady] = useState(false);
   const { newProduct } = useContext(ProductContext);
+  const products = useSelector((state: AppStore) => state.product.data);
 
-  const initialValues: IProduct = {
+  const initialValues: Product = {
     id: "",
     categoryId: "",
     subCategoryId: "",
@@ -43,8 +46,8 @@ export default function ProductsForm({
       metal: [],
       wood: [],
     },
-    favorite: false,
-    reviews: [],
+    isNew: true,
+    isUpdated: false,
   };
 
   const productSchema = Yup.object().shape({
@@ -76,8 +79,8 @@ export default function ProductsForm({
       initialValues={initialValues}
       validationSchema={productSchema}
       onSubmit={(values, { resetForm }) => {
-        const product: IProduct = {
-          id: v4(),
+        const product: Product = {
+          id: validateID<Product>({ items: products }),
           categoryId: subCategory.categoryId,
           subCategoryId: subCategory.id || "",
           title: values.title,
@@ -87,14 +90,14 @@ export default function ProductsForm({
             width: values.dimensions.width,
             depth: values.dimensions.depth,
           },
-          favorite: false,
+          isNew: true,
+          isUpdated: false,
           images: urls || [],
           material: {
             metal: [],
             wood: [],
           },
           price: values.price,
-          reviews: [],
         };
         resetForm();
         newProduct(product);

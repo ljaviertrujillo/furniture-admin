@@ -7,15 +7,18 @@ import { TypeButton } from "../Button/SecondaryButton";
 import { useContext, useState } from "react";
 import { ProjectContext } from "../../context/Web/ProjectsContext";
 import { uploadTempFile } from "../../services/firebase/ImageController";
-import { v4 } from "uuid";
-import { IProject } from "../../models";
+import { Project } from "../../models";
+import { validateID } from "../../utilities";
+import { useSelector } from "react-redux";
+import { AppStore } from "../../redux/store";
 
 export default function ProjectForm({ onClose }: { onClose: () => void }) {
   const { newProject } = useContext(ProjectContext);
   const [urls, setUrls] = useState<string[]>([]);
   const [urlsReady, setUrlsReady] = useState(false);
+  const projects = useSelector((state: AppStore) => state.project.data);
 
-  const initialValues: IProject = {
+  const initialValues: Project = {
     id: "",
     title: "",
     description: "",
@@ -26,7 +29,11 @@ export default function ProjectForm({ onClose }: { onClose: () => void }) {
       address: "",
       phoneNumber: "",
       logo: "",
+      isNew: true,
+      isUpdated: false,
     },
+    isNew: true,
+    isUpdated: false,
   };
 
   const projectSchema = Yup.object().shape({
@@ -52,17 +59,21 @@ export default function ProjectForm({ onClose }: { onClose: () => void }) {
       initialValues={initialValues}
       validationSchema={projectSchema}
       onSubmit={(values, { resetForm }) => {
-        const project: IProject = {
-          id: v4(),
+        const project: Project = {
+          id: validateID<Project>({ items: projects }),
           title: values.title,
           description: values.description,
           images: urls || [],
+          isNew: true,
+          isUpdated: false,
           client: {
             id: "",
             name: "",
             address: "",
             phoneNumber: "",
             logo: "",
+            isNew: true,
+            isUpdated: false,
           },
         };
         resetForm();

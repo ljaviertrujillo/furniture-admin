@@ -1,6 +1,11 @@
-@import '../../../../../styles/index.scss';
+@import '../../../../styles/index.scss';
 
-
+.preview{
+    &.preview-benefits{
+        display: flex;
+        padding: 1rem;
+    }
+}
 
 .benefits{
     gap: 1rem;

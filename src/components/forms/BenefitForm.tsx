@@ -1,23 +1,28 @@
 import "./forms.scss";
 import { Formik, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
-import { IBenefit } from "../../models";
-import { v4 } from "uuid";
+import { Benefit } from "../../models";
 import { InputTextField, TextAreaField } from "./Input";
 import { SecondaryButton } from "../Button";
 import { TypeButton } from "../Button/SecondaryButton";
 import IconsLibrary from "../Icons/IconsLibrary";
 import { useState, useContext } from "react";
 import { BenefitContext } from "../../context/Web/BenefitContext";
+import { useSelector } from "react-redux";
+import { AppStore } from "../../redux/store";
+import { validateID } from "../../utilities";
 
 export default function BenefitForm({ onClose }: { onClose: () => void }) {
+  const benefits = useSelector((state: AppStore) => state.benefit.data);
   const { newBenefit } = useContext(BenefitContext);
   const [iconIndex, setIconIndex] = useState(0);
-  const initialValues: IBenefit = {
+  const initialValues: Benefit = {
     id: "",
     title: "",
     description: "",
     iconIndex: 0,
+    isNew: true,
+    isUpdated: false,
   };
 
   const benefitSchema = Yup.object().shape({
@@ -40,12 +45,14 @@ export default function BenefitForm({ onClose }: { onClose: () => void }) {
       initialValues={initialValues}
       validationSchema={benefitSchema}
       onSubmit={(values, { resetForm }) => {
-        const benefit: IBenefit = {
-          id: v4(),
+        const benefit: Benefit = {
+          id: validateID<Benefit>({ items: benefits }),
           title: values.title,
           description: values.description,
           image: "",
           iconIndex: iconIndex,
+          isNew: true,
+          isUpdated: false,
         };
         resetForm();
         newBenefit(benefit);

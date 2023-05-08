@@ -1,31 +1,37 @@
 import * as Yup from "yup";
 import { Formik, Form, ErrorMessage } from "formik";
-import { ICategory, ISubCategory } from "../../models";
+import { SubCategory } from "../../models";
 import { useContext, useState } from "react";
 import { CategoriesContext } from "../../context/Web/CategoriesContext";
 import { SecondaryButton } from "../Button";
 import { InputImageField, InputTextField, TextAreaField } from "./Input";
 import { TypeButton } from "../Button/SecondaryButton";
 import { uploadTempFile } from "../../services/firebase/ImageController";
-import { v4 } from "uuid";
+import { validateID } from "../../utilities";
+import { useSelector } from "react-redux";
+import { AppStore } from "../../redux/store";
 
 export default function SubCategoryForm({
-  category,
+  categoryId,
   onClose,
 }: {
-  category: ICategory | null;
+  categoryId: string;
   onClose: () => void;
 }) {
   const { newSubCategory } = useContext(CategoriesContext);
   const [urlsReady, setUrlsReady] = useState(false);
   const [urls, setUrls] = useState<string[]>([]);
-  const initialValues: ISubCategory = {
+  const subCategories = useSelector(
+    (state: AppStore) => state.subCategory.data
+  );
+  const initialValues: SubCategory = {
     id: "",
     title: "",
     description: "",
     image: "",
-    products: [],
     categoryId: "",
+    isNew: true,
+    isUpdated: false,
   };
 
   const subCategorySchema = Yup.object().shape({
@@ -51,13 +57,14 @@ export default function SubCategoryForm({
       initialValues={initialValues}
       validationSchema={subCategorySchema}
       onSubmit={(values, { resetForm }) => {
-        const subCategory: ISubCategory = {
-          id: v4(),
+        const subCategory: SubCategory = {
+          id: validateID<SubCategory>({ items: subCategories }),
           title: values.title,
           description: values.description,
           image: urls[0] || "",
-          products: [],
-          categoryId: category?.id || "",
+          categoryId: categoryId,
+          isNew: true,
+          isUpdated: false,
         };
         resetForm();
         newSubCategory(subCategory);

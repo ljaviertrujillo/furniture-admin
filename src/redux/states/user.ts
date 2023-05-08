@@ -1,11 +1,13 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { IUser } from "../../models/";
 import { clearLocalStorage, persistLocalStorage } from "../../utilities";
+import { User } from "../../models";
 
-export const EmptyUserState: IUser = {
+export const EmptyUserState: User = {
   id: 0,
   name: "",
   email: "",
+  isNew: true,
+  isUpdated: false,
 };
 
 export const userKey = "user";
@@ -17,12 +19,12 @@ export const userSlice = createSlice({
     : EmptyUserState,
   reducers: {
     createUser: (state, action) => {
-      persistLocalStorage<IUser>(userKey, action.payload);
+      persistLocalStorage<User>(userKey, action.payload);
       return action.payload;
     },
     updateUser: (state, action) => {
       const result = { ...state, ...action.payload };
-      persistLocalStorage<IUser>(userKey, result);
+      persistLocalStorage<User>(userKey, result);
       return result;
     },
     resetUser: () => {

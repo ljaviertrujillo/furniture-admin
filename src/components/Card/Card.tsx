@@ -1,10 +1,10 @@
 import "./card.scss";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import { useState } from "react";
-import { classNames } from "../../../../../utilities";
 import { VscClose } from "react-icons/vsc";
-import ConfirmButton from "../../../../../components/Button/ConfirmButton";
-import { icons } from "../../../../../components/Icons/IconsLibrary";
+import { icons } from "../Icons/IconsLibrary";
+import { classNames } from "../../utilities";
+import { ConfirmButton } from "../Button";
 
 interface CardProps {
   title: string;

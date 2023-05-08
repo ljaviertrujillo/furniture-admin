@@ -11,7 +11,7 @@ export enum ThemeColors {
   DARK = "dark",
 }
 
-export interface PageContextProps {
+export interface AppContextProps {
   sidebarOpen: boolean;
   setSidebarOpen: Dispatch<SetStateAction<boolean>>;
   userOptions: boolean;
@@ -20,7 +20,7 @@ export interface PageContextProps {
   setTheme: Dispatch<SetStateAction<ThemeColors>>;
 }
 
-export const PageContext = createContext<PageContextProps>({
+export const AppContext = createContext<AppContextProps>({
   sidebarOpen: false,
   setSidebarOpen: function (): void {},
   userOptions: false,
@@ -29,7 +29,7 @@ export const PageContext = createContext<PageContextProps>({
   setTheme: function (): void {},
 });
 
-export default function PageContextProvider({
+export default function AppContextProvider({
   children,
 }: {
   children: ReactNode;
@@ -39,7 +39,7 @@ export default function PageContextProvider({
   const [theme, setTheme] = useState(ThemeColors.LIGHT);
 
   return (
-    <PageContext.Provider
+    <AppContext.Provider
       value={{
         sidebarOpen,
         setSidebarOpen,
@@ -50,6 +50,6 @@ export default function PageContextProvider({
       }}
     >
       {children}
-    </PageContext.Provider>
+    </AppContext.Provider>
   );
 }

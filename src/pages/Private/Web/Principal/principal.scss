@@ -1,4 +1,10 @@
-@import "../../../../../styles/index.scss";
+@import '../../../../styles/index.scss';
+
+.preview{
+  &.preview-home{
+    padding: 1rem;
+  }
+}
 
 .info {
   height: 10vh;

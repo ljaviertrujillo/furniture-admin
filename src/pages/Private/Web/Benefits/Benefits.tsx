@@ -16,7 +16,7 @@ export default function Benefits() {
     <div className={classNames("web-container", isOpen ? "collapsed" : "")}>
       <ConfigAside headerTitle="Beneficios" main={<BenefitsMain />} />
       <div className="preview-container" onClick={() => setIsOpen(false)}>
-        <section className="preview">
+        <section className="preview preview-benefits">
           {benefits.length > 0 ? (
             <div className="benefits">
               {benefits.map((benefit) => {
@@ -24,7 +24,7 @@ export default function Benefits() {
                   (icon) => icon.id === benefit.iconIndex
                 )?.icon;
                 return (
-                  <div className="benefit">
+                  <div key={benefit.id} className="benefit">
                     <div className="benefit-icon">{selectedIcon}</div>
                     <div className="benefit-info">
                       <div className="benefit-title">{benefit.title}</div>

@@ -1,16 +1,20 @@
 import { NavLink } from "react-router-dom";
 import { useContext } from "react";
-import { PageContext } from "../../context/PageContext";
+import { AppContext } from "../../context/AppContext";
 import { ItemMenu } from "../../models";
 
 export interface RouteItemInterface {
-  route: ItemMenu,
+  route: ItemMenu;
 }
 
 function SidebarItemView({ route }: RouteItemInterface) {
-  const { setSidebarOpen } = useContext(PageContext)
+  const { setSidebarOpen } = useContext(AppContext);
   return (
-    <NavLink to={route.url} className="route-link" onClick={ () => setSidebarOpen(false)}>
+    <NavLink
+      to={route.url}
+      className="route-link"
+      onClick={() => setSidebarOpen(false)}
+    >
       <div className="active-bar"></div>
       <div className="route">
         <route.icon className="icon" />

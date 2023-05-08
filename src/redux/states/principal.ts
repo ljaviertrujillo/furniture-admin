@@ -1,10 +1,14 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { IPrincipal } from "../../models/principal.model";
+import { Principal } from "../../models/principal.model";
 
-export const EmptyPrincipal: IPrincipal = {
+export const EmptyPrincipal: Principal = {
   title: "NOMBRE DE TU EMPRESA",
   slogan: "Slogan de tu empresa",
   image: "",
+  "logo-l": "",
+  "logo-s": "",
+  isNew: true,
+  isUpdated: false,
 };
 
 export const principalSlice = createSlice({

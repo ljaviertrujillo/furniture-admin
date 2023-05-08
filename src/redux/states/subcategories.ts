@@ -1,29 +1,20 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { IBenefit } from "../../models";
+import { SubCategory } from "../../models";
 
-export interface BenefitState {
-  data: IBenefit[];
+export interface SubCategoryState {
+  data: SubCategory[];
   isLoading: boolean;
   error: string | null;
 }
 
-const benefit: IBenefit = {
-  id: 'jeje',
-  title:'dfdccddcdf',
-  description: 'cddcdccsscsc',
-  isNew: true,
-  isUpdated: false,
-  iconIndex: 5,
-}
-
-const initialState: BenefitState = {
-  data: [benefit],
+const initialState: SubCategoryState = {
+  data: [],
   isLoading: false,
   error: null,
 };
 
-export const benefitSlice = createSlice({
-  name: "benefit",
+export const subCategorySlice = createSlice({
+  name: "subcategory",
   initialState,
   reducers: {
     fetchStart: (state) => {
@@ -38,33 +29,34 @@ export const benefitSlice = createSlice({
       state.isLoading = false;
       state.error = action.payload;
     },
-    addBenefit: (state, action) => {
+    addSubCategory: (state, action) => {
       return {
         ...state,
         data: [...state.data, action.payload],
       };
     },
-    updateBenefit: (state, action) => {
+    updateSubCategory: (state, action) => {
       return {
         ...state,
         data: [...state.data, ...action.payload],
       };
     },
-    removeBenefit: (state, action) => {
+    removeSubCategory: (state, action) => {
       return {
         ...state,
-        data: state.data.filter((benefit) => benefit.id !== action.payload),
+        data: state.data.filter((category) => category.id !== action.payload),
       };
     },
   },
 });
 
 export const {
-  fetchError,
   fetchStart,
   fetchSucess,
-  addBenefit,
-  updateBenefit,
-  removeBenefit,
-} = benefitSlice.actions;
-export default benefitSlice.reducer;
+  fetchError,
+  addSubCategory,
+  updateSubCategory,
+  removeSubCategory,
+} = subCategorySlice.actions;
+
+export default subCategorySlice.reducer;

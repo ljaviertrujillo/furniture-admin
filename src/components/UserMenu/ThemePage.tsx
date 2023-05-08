@@ -1,9 +1,9 @@
 import { useContext } from "react";
-import { PageContext, ThemeColors } from "../../context/PageContext";
+import { AppContext, ThemeColors } from "../../context/AppContext";
 import { ThemeColor } from "../Button";
 
 export default function ThemePage() {
-  const { setTheme } = useContext(PageContext);
+  const { setTheme } = useContext(AppContext);
   return (
     <div className="themes">
       <ThemeColor

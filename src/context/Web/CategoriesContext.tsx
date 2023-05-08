@@ -6,15 +6,14 @@ import {
   createContext,
   useState,
 } from "react";
-import { ICategory, IProduct, ISubCategory } from "../../models";
 import { useDispatch } from "react-redux";
-import {
-  addCategory,
-  addSubCategory,
-  removeCategory,
-  removeSubCategory,
-} from "../../redux/states/categories";
+import { addCategory, removeCategory } from "../../redux/states/categories";
 import { TbLayoutGridAdd, TbPlaylistAdd } from "react-icons/tb";
+import {
+  addSubCategory,
+  removeSubCategory,
+} from "../../redux/states/subcategories";
+import { Category, SubCategory } from "../../models";
 
 interface MenuCategoryItem {
   id: number;
@@ -29,22 +28,22 @@ interface CategoriesContextProps {
   setCategoryIndex: Dispatch<SetStateAction<number>>;
   categoryMenu: string;
   setCategoryMenu: Dispatch<SetStateAction<string>>;
-  newCategory: (category: ICategory) => void;
-  deleteCategory: (category: ICategory) => void;
-  newSubCategory: (subCategory: ISubCategory) => void;
-  deleteSubcategory: (subCategory: ISubCategory) => void;
+  newCategory: (category: Category) => void;
+  deleteCategory: (category: Category) => void;
+  newSubCategory: (subCategory: SubCategory) => void;
+  deleteSubcategory: (subCategory: SubCategory) => void;
 }
 
 export const CategoriesContext = createContext<CategoriesContextProps>({
   menuItems: [],
   categoryIndex: 0,
-  setCategoryIndex: function(): void {},
+  setCategoryIndex: function (): void {},
   categoryMenu: "categories",
   setCategoryMenu: function (): void {},
-  newCategory: function (category: ICategory): void {},
-  deleteCategory: function (category: ICategory): void {},
-  newSubCategory: function (subCategory: ISubCategory): void {},
-  deleteSubcategory: function (subCategory: ISubCategory): void {},
+  newCategory: function (category: Category): void {},
+  deleteCategory: function (category: Category): void {},
+  newSubCategory: function (subCategory: SubCategory): void {},
+  deleteSubcategory: function (subCategory: SubCategory): void {},
 });
 
 export default function CategoriesContextProvider({
@@ -71,19 +70,19 @@ export default function CategoriesContextProvider({
     },
   ];
 
-  const newCategory = (category: ICategory) => {
+  const newCategory = (category: Category) => {
     dispatch(addCategory(category));
   };
 
-  const deleteCategory = (category: ICategory) => {
+  const deleteCategory = (category: Category) => {
     dispatch(removeCategory(category.id));
   };
 
-  const newSubCategory = (subCategory: ISubCategory) => {
+  const newSubCategory = (subCategory: SubCategory) => {
     dispatch(addSubCategory(subCategory));
   };
 
-  const deleteSubcategory = (subCategory: ISubCategory) => {
+  const deleteSubcategory = (subCategory: SubCategory) => {
     dispatch(removeSubCategory(subCategory));
   };
 

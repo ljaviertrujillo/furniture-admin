@@ -2,7 +2,7 @@ import { useContext } from 'react';
 import { classNames } from '../../utilities';
 import './buttons.scss'
 import { MdLightMode, MdNightlight } from "react-icons/md";
-import { PageContext, ThemeColors } from '../../context/PageContext';
+import { AppContext, ThemeColors } from '../../context/AppContext';
 
 interface Props {
   type: ThemeColors;
@@ -10,7 +10,7 @@ interface Props {
 }
 
 export default function ThemeColor({ type, handle }: Props) {
-  const { theme } = useContext(PageContext)
+  const { theme } = useContext(AppContext)
   return (
     <button 
       type="button"

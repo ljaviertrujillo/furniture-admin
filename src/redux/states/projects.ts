@@ -1,8 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { IProject } from "../../models";
+import { Project } from "../../models";
 
 export interface ProjectState {
-  data: IProject[];
+  data: Project[];
   isLoading: boolean;
   error: string | null;
 }
@@ -44,12 +44,19 @@ export const projectSlice = createSlice({
     removeProject: (state, action) => {
       return {
         ...state,
-        data: state.data.filter(project => project !== action.payload)
-      }
+        data: state.data.filter((project) => project !== action.payload),
+      };
     },
   },
 });
 
-export const { fetchStart, fetchError, fetchSucess, addProject, removeProject, updateProject } = projectSlice.actions;
+export const {
+  fetchStart,
+  fetchError,
+  fetchSucess,
+  addProject,
+  removeProject,
+  updateProject,
+} = projectSlice.actions;
 
 export default projectSlice.reducer;

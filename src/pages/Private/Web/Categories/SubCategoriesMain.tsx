@@ -6,16 +6,20 @@ import {
   Select,
   SubCategoryForm,
 } from "../../../../components";
-import { ICategory, ISubCategory } from "../../../../models";
+import { Category } from "../../../../models";
 import { useContext, useState } from "react";
 import { CategoriesContext } from "../../../../context/Web/CategoriesContext";
 import { VscAdd, VscClose } from "react-icons/vsc";
 
 export default function SubCategoriesMain() {
   const categories = useSelector((state: AppStore) => state.category.data);
+  const subCategories = useSelector(
+    (state: AppStore) => state.subCategory.data
+  );
   const [formVisible, setFormVisible] = useState<boolean>(false);
   const { deleteSubcategory, categoryIndex, setCategoryIndex } =
     useContext(CategoriesContext);
+  const categoryId = categories[categoryIndex].id;
 
   const handleCategoryIndex = (value: number) => {
     setCategoryIndex(value);
@@ -26,7 +30,7 @@ export default function SubCategoriesMain() {
     <>
       {categories.length > 0 ? (
         <>
-          <Select<ICategory>
+          <Select<Category>
             name="categories"
             label="Categorias"
             index={categoryIndex}
@@ -44,21 +48,23 @@ export default function SubCategoriesMain() {
       )}
       {formVisible && (
         <SubCategoryForm
-          category={categories[categoryIndex]}
+          categoryId={categories[categoryIndex].id}
           onClose={() => setFormVisible(false)}
         />
       )}
-      {categories.length > 0 && categories[categoryIndex].subCategories.length > 0 ? (
+      {categories.length > 0 && subCategories.length > 0 ? (
         <div className="cards">
-          {categories[categoryIndex].subCategories.map((subCategory) => (
-            <Card
-              key={subCategory.id}
-              title={subCategory.title}
-              description={subCategory.description}
-              image={subCategory.image}
-              handleRemove={() => deleteSubcategory(subCategory)}
-            />
-          ))}
+          {subCategories
+            .filter((subCategory) => subCategory.categoryId === categoryId)
+            .map((subCategory) => (
+              <Card
+                key={subCategory.id}
+                title={subCategory.title}
+                description={subCategory.description}
+                image={subCategory.image}
+                handleRemove={() => deleteSubcategory(subCategory)}
+              />
+            ))}
         </div>
       ) : null}
     </>

@@ -5,7 +5,7 @@ import { v4 } from 'uuid'
 export async function uploadTempFile (files: File[]) {
     const urls: string[] = []
     for (const file of files) {
-        const storageRef = ref(storage, `temp/${v4()}`)
+        const storageRef = ref(storage, `images/temp/${v4()}`)
         await uploadBytes(storageRef, file)
         const url = await getDownloadURL(storageRef)
         urls.push(url)

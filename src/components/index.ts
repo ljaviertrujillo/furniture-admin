@@ -1,5 +1,5 @@
 export * from './Button';
-export * from './Card';
+export { default as Card } from './Card/Card';
 export { default as IconsLibrary } from './Icons/IconsLibrary';
 export { default as Logout } from './Logout/Logout';
 export { default as Navbar } from './Navbar/Navbar';

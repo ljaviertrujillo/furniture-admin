@@ -1,4 +1,4 @@
-export interface IPrincipal {
+export interface Principal {
   title: string;
   slogan: string;
   image: string;

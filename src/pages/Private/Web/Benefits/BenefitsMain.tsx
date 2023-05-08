@@ -2,9 +2,8 @@ import { useState, useContext } from "react";
 import BenefitForm from "../../../../components/forms/BenefitForm";
 import { useSelector } from "react-redux";
 import { AppStore } from "../../../../redux/store";
-import { ComplementaryButton } from "../../../../components";
+import { Card, ComplementaryButton } from "../../../../components";
 import { VscAdd, VscClose } from "react-icons/vsc";
-import { Card } from "../Card";
 import { BenefitContext } from "../../../../context/Web/BenefitContext";
 
 export default function BenefitsMain() {

@@ -1,10 +1,10 @@
-import { IClient } from "./client.model";
+import { Client } from "./client.model";
 
-export interface IProject {
+export interface Project {
   id: string;
   title: string;
   description: string;
-  client: IClient;
+  client: Client;
   images: string[];
   isNew: true;
   isUpdated: false;

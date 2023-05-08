@@ -1,8 +1,9 @@
-export interface Category {
+export interface SubCategory {
   id: string;
   title: string;
-  description: string;
   image: string;
+  description: string;
+  categoryId: string;
   isNew: true;
   isUpdated: false;
 }

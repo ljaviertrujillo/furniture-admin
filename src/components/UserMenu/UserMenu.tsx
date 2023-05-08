@@ -1,6 +1,6 @@
 import './userMenu.scss'
 import { useContext } from "react"
-import { PageContext } from "../../context/PageContext"
+import { AppContext } from "../../context/AppContext"
 import { useNavigate } from "react-router-dom"
 import { classNames } from "../../utilities"
 import { UtilityButton } from "../Button"
@@ -11,7 +11,7 @@ import {Logout} from "../"
 import ThemePage from "./ThemePage"
 
 export default function UserMenu() {
-    const { userOptions, setUserOptions } = useContext(PageContext)
+    const { userOptions, setUserOptions } = useContext(AppContext)
     const navigate = useNavigate()
 
     const profileNav = () => {

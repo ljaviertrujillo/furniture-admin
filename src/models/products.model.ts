@@ -1,45 +1,35 @@
-export interface IProduct {
+export interface Product {
   id: string;
   title: string;
   description: string;
   price: number;
   images: string[];
-  dimensions: IDimension;
-  material: IMaterial;
-  reviews: IReview[];
+  dimensions: Dimension;
+  material: Material;
   categoryId: string;
   subCategoryId: string;
   isNew: true;
   isUpdated: false;
 }
 
-export interface IReview {
-  id: string;
-  user: string;
-  date: Date;
-  rating: number;
-  comments: string;
-  images?: string[];
-}
-
-export interface IDimension {
+export interface Dimension {
   height: number;
   width: number;
   depth: number;
 }
 
-export interface IMaterial {
-  metal: IMaterialType[];
-  wood: IMaterialType[];
+export interface Material {
+  metal: MaterialType[];
+  wood: MaterialType[];
 }
 
-export interface IMaterialColor {
-  name: string,
-  hex: string
+export interface MaterialColor {
+  name: string;
+  hex: string;
 }
 
-export interface IMaterialType {
+export interface MaterialType {
   type: string[];
-  colors: IMaterialColor[] | null
+  colors: MaterialColor[] | null;
   finish: string[];
 }

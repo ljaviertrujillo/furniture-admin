@@ -1,4 +1,4 @@
-export interface IBenefit {
+export interface Benefit {
   id: string;
   title: string;
   description: string;

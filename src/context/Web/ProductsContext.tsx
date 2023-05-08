@@ -5,17 +5,17 @@ import {
   createContext,
   useState,
 } from "react";
-import { IProduct } from "../../models";
+import { Product } from "../../models";
 import { useDispatch } from "react-redux";
-import { addProduct, removeProduct } from "../../redux/states/categories";
+import { addProduct, removeProduct } from "../../redux/states/products";
 
 interface ProductContextProps {
   categoryIndex: number;
   setCategoryIndex: Dispatch<SetStateAction<number>>;
   subCategoryIndex: number;
   setSubCategoryIndex: Dispatch<SetStateAction<number>>;
-  newProduct: (product: IProduct) => void;
-  deleteProduct: (product: IProduct) => void;
+  newProduct: (product: Product) => void;
+  deleteProduct: (product: Product) => void;
 }
 
 export const ProductContext = createContext<ProductContextProps>({
@@ -23,8 +23,8 @@ export const ProductContext = createContext<ProductContextProps>({
   setCategoryIndex: function (): void {},
   subCategoryIndex: 0,
   setSubCategoryIndex: function (): void {},
-  newProduct: function (product: IProduct): void {},
-  deleteProduct: function (product: IProduct): void {},
+  newProduct: function (product: Product): void {},
+  deleteProduct: function (product: Product): void {},
 });
 
 export default function ProductsContextProvider({
@@ -32,21 +32,21 @@ export default function ProductsContextProvider({
 }: {
   children: ReactNode;
 }) {
-    const dispatch = useDispatch();
+  const dispatch = useDispatch();
   const [categoryIndex, setCategoryIndex] = useState<number>(0);
   const [subCategoryIndex, setSubCategoryIndex] = useState<number>(0);
 
-  const newProduct = (product: IProduct) => {
+  const newProduct = (product: Product) => {
     dispatch(addProduct(product));
   };
 
-  const deleteProduct = (product: IProduct) => {
+  const deleteProduct = (product: Product) => {
     dispatch(removeProduct(product));
   };
 
   const editProduct = () => {
-    console.log('edit')
-  }
+    console.log("edit");
+  };
 
   return (
     <ProductContext.Provider
