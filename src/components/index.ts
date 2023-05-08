@@ -1,6 +1,9 @@
 export * from './Button';
+export * from './Card';
+export { default as IconsLibrary } from './Icons/IconsLibrary';
 export { default as Logout } from './Logout/Logout';
 export { default as Navbar } from './Navbar/Navbar';
+export { default as SecondarySideBar } from './SecondarySideBar/SecondarySideBar';
 export * from './Sidebar';
 export { default as ThemePage } from './UserMenu/ThemePage';
 export { default as UserMenu } from './UserMenu/UserMenu';

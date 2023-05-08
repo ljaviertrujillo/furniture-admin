@@ -1,5 +1,6 @@
 import {
   Dispatch,
+  ElementType,
   ReactNode,
   SetStateAction,
   createContext,
@@ -9,32 +10,41 @@ import { ICategory, IProduct, ISubCategory } from "../../models";
 import { useDispatch } from "react-redux";
 import {
   addCategory,
-  addProduct,
   addSubCategory,
-  fetchError,
   removeCategory,
-  removeProduct,
   removeSubCategory,
 } from "../../redux/states/categories";
+import { TbLayoutGridAdd, TbPlaylistAdd } from "react-icons/tb";
+
+interface MenuCategoryItem {
+  id: number;
+  title: string;
+  label: string;
+  icon: ElementType;
+}
 
 interface CategoriesContextProps {
-  categories: ICategory[];
+  menuItems: MenuCategoryItem[];
+  categoryIndex: number;
+  setCategoryIndex: Dispatch<SetStateAction<number>>;
+  categoryMenu: string;
+  setCategoryMenu: Dispatch<SetStateAction<string>>;
   newCategory: (category: ICategory) => void;
   deleteCategory: (category: ICategory) => void;
   newSubCategory: (subCategory: ISubCategory) => void;
   deleteSubcategory: (subCategory: ISubCategory) => void;
-  newProduct: (product: IProduct) => void;
-  deleteProduct: (product: IProduct) => void;
 }
 
 export const CategoriesContext = createContext<CategoriesContextProps>({
-  categories: [],
+  menuItems: [],
+  categoryIndex: 0,
+  setCategoryIndex: function(): void {},
+  categoryMenu: "categories",
+  setCategoryMenu: function (): void {},
   newCategory: function (category: ICategory): void {},
   deleteCategory: function (category: ICategory): void {},
   newSubCategory: function (subCategory: ISubCategory): void {},
   deleteSubcategory: function (subCategory: ISubCategory): void {},
-  newProduct: function (product: IProduct): void {},
-  deleteProduct: function (product: IProduct): void {},
 });
 
 export default function CategoriesContextProvider({
@@ -43,38 +53,23 @@ export default function CategoriesContextProvider({
   children: ReactNode;
 }) {
   const dispatch = useDispatch();
-  const [form, setForm] = useState(false);
+  const [categoryMenu, setCategoryMenu] = useState<string>("categories");
+  const [categoryIndex, setCategoryIndex] = useState<number>(0);
 
-  const categories: ICategory[] = [
+  const menuItems: MenuCategoryItem[] = [
     {
-      id: "residencial",
-      title: "Residencial",
-      description: "Descripcion default",
-      url: "/categories/residencial",
-      image:
-        "https://images.squarespace-cdn.com/content/v1/551d8079e4b002dbe2052a92/4661952d-6f8d-445e-870a-d08e3e8a71f2/cama+rec+nogal+2c+2.jpg?format=1000w",
-      subCategories: [
-        {
-          title: "Recamara",
-          description: "Todo para tu recamara",
-          image:
-            "https://images.squarespace-cdn.com/content/v1/551d8079e4b002dbe2052a92/4661952d-6f8d-445e-870a-d08e3e8a71f2/cama+rec+nogal+2c+2.jpg?format=1000w",
-          products: [],
-        },
-      ],
+      id: 0,
+      title: "categories",
+      label: "Categorias",
+      icon: TbLayoutGridAdd,
     },
     {
-      id: "interiorws",
-      title: "Interiores",
-      description: "Descripcion default",
-      url: "/categories/residencial",
-      image:
-        "https://images.squarespace-cdn.com/content/v1/551d8079e4b002dbe2052a92/4661952d-6f8d-445e-870a-d08e3e8a71f2/cama+rec+nogal+2c+2.jpg?format=1000w",
-      subCategories: [],
+      id: 1,
+      title: "subcategories",
+      label: "SubCategorias",
+      icon: TbPlaylistAdd,
     },
   ];
-
-  // const getCategories = () => {};
 
   const newCategory = (category: ICategory) => {
     dispatch(addCategory(category));
@@ -92,24 +87,18 @@ export default function CategoriesContextProvider({
     dispatch(removeSubCategory(subCategory));
   };
 
-  const newProduct = (product: IProduct) => {
-    dispatch(addProduct(product));
-  };
-
-  const deleteProduct = (product: IProduct) => {
-    dispatch(removeProduct(product));
-  };
-
   return (
     <CategoriesContext.Provider
       value={{
-        categories,
+        menuItems,
+        categoryIndex,
+        setCategoryIndex,
+        categoryMenu,
+        setCategoryMenu,
         newCategory,
         deleteCategory,
         newSubCategory,
         deleteSubcategory,
-        newProduct,
-        deleteProduct,
       }}
     >
       {children}

@@ -3,13 +3,14 @@ export interface IProduct {
   title: string;
   description: string;
   price: number;
-  favorite: boolean;
   images: string[];
   dimensions: IDimension;
   material: IMaterial;
   reviews: IReview[];
   categoryId: string;
   subCategoryId: string;
+  isNew: true;
+  isUpdated: false;
 }
 
 export interface IReview {

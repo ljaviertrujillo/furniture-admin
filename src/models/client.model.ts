@@ -4,4 +4,6 @@ export interface IClient {
   logo?: string;
   address: string;
   phoneNumber: string;
+  isNew: true;
+  isUpdated: false;
 }

@@ -7,4 +7,6 @@ export interface IUser {
   id: number;
   name: string;
   email: string;
+  isNew: true;
+  isUpdated: false;
 }

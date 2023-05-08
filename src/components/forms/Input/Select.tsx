@@ -11,22 +11,23 @@ export interface OptionType {
 }
 
 interface SelectProps<T extends OptionType> extends InputProps {
-  options?: T[];
-  onChange?: (value: T) => void;
+  options: T[];
+  index: number;
+  onChange?: (value: number) => void;
 }
 
 export default function Select<T extends OptionType>({
   name,
   label,
   options,
+  index,
   onChange,
 }: SelectProps<T>) {
-  const [option, setOption] = useState(options && options[0].title);
   const [isOpen, setIsOpen] = useState(false);
 
-  const handleClick = (option: T) => {
-    setOption(option.title);
+  const handleClick = (option: number) => {
     onChange && onChange(option);
+    setIsOpen(false)
   };
 
   return (
@@ -37,19 +38,20 @@ export default function Select<T extends OptionType>({
     >
       <div className=" select-content">
         <span className="button">{label}</span>
-        {option}
+        {options[index].title}
         {isOpen ? <BsChevronUp /> : <BsChevronDown />}
       </div>
       <ul className={classNames("select", isOpen ? "expanded" : "")}>
-        {options?.map((option) => (
+        {options?.map((option,i) => {
+          return (
           <li
             key={option.id}
             className="option"
-            onClick={() => handleClick(option)}
+            onClick={() => handleClick(i)}
           >
             {option.title}
           </li>
-        ))}
+        )})}
       </ul>
     </div>
   );

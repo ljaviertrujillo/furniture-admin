@@ -5,12 +5,14 @@ import categoryReducer, { CategoryState } from "./states/categories";
 import { IPrincipal } from "../models/principal.model";
 import principalReducer from "./states/principal";
 import projectReducer, { ProjectState } from "./states/projects";
+import benefitReducer, { BenefitState } from "./states/benefits";
 
 export interface AppStore {
   user: IUser;
   principal: IPrincipal;
   category: CategoryState;
   project: ProjectState;
+  benefit: BenefitState;
 }
 
 export default configureStore<AppStore>({
@@ -19,5 +21,6 @@ export default configureStore<AppStore>({
     principal: principalReducer,
     category: categoryReducer,
     project: projectReducer,
+    benefit: benefitReducer,
   },
 });

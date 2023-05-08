@@ -9,6 +9,7 @@
   height: 2.5rem;
   border-radius: 0.25rem;
   box-shadow: 0 0 0 1px $P-400;
+
   .icon-container {
     display: flex;
     align-items: center;
@@ -65,6 +66,10 @@
 
   &.focused {
     box-shadow: 0 0 0 1px $S-200, inset 0 0 1px 1px rgba($S-400, 0.4);
+  }
+
+  &.error{
+    box-shadow: 0 0 0 1px tomato, inset 0 0 1px 1px rgba(tomato, 0.4);
   }
 
   .viewButton {

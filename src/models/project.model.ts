@@ -1,9 +1,11 @@
 import { IClient } from "./client.model";
 
-export interface IProject{
-    id: string;
-    title: string;
-    description: string,
-    client: IClient;
-    images: string[];
+export interface IProject {
+  id: string;
+  title: string;
+  description: string;
+  client: IClient;
+  images: string[];
+  isNew: true;
+  isUpdated: false;
 }

@@ -7,6 +7,9 @@ export interface ISubCategory {
   description: string;
   products: IProduct[];
   categoryId: string
+  isNew: true;
+  isUpdated: false;
+
 }
 
 export interface ICategory {
@@ -16,4 +19,6 @@ export interface ICategory {
   image: string;
   url: string;
   subCategories: ISubCategory[];
+  isNew: true;
+  isUpdated: false;
 }

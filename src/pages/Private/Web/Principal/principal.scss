@@ -1,0 +1,51 @@
+@import "../../../../../styles/index.scss";
+
+.info {
+  height: 10vh;
+  .company-title {
+    text-transform: uppercase;
+  }
+  .company-slogan {
+    text-transform: initial;
+  }
+}
+.background {
+  height: 90vh;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 3rem;
+  .background-item {
+    background-color: $P-500;
+    width: calc((100% - 9rem) / 4);
+    border-radius: 25rem;
+    height: 85%;
+    background-size: cover;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+  }
+
+  .background-item:nth-child(4) {
+    position: relative;
+    height: calc(112%);
+    margin-top: -7%;
+
+    .contact-link {
+      cursor: pointer;
+      position: absolute;
+      top: calc(10% + 3rem);
+      left: -3rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: $S-400;
+      width: 6rem;
+      height: 6rem;
+      border-radius: 100%;
+      font-size: 2rem;
+    }
+  }
+  .background-item:nth-child(2) {
+    margin-top: 8%;
+  }
+}

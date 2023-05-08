@@ -30,11 +30,14 @@ export default function ProjectForm({ onClose }: { onClose: () => void }) {
   };
 
   const projectSchema = Yup.object().shape({
-    title: Yup.string().required("Titulo requerido"),
+    title: Yup.string()
+      .required("Campo requerido")
+      .min(8, "Debe contener un mínimo 8 caracteres")
+      .max(50, "Debe contener un máximo de 50 caracteres"),
     description: Yup.string()
-      .required("Descripcion requerida")
-      .min(8, "Debe contener un minimo de 8 caracteres")
-      .max(120, "Debe contener un maximo de 120 caracteres"),
+      .required("Campo requerido")
+      .min(8, "Debe contener un mínimo 8 caracteres")
+      .max(128, "Debe contener un máximo de 128 caracteres"),
     images: Yup.array().of(Yup.string().url()),
   });
 
@@ -67,12 +70,26 @@ export default function ProjectForm({ onClose }: { onClose: () => void }) {
         onClose();
       }}
     >
-      {({ isSubmitting }) => (
+      {({ isSubmitting, errors }) => (
         <Form className="category-form">
-          <InputTextField name="title" label="Nombre del proyecto" />
-          <ErrorMessage name="title" />
-          <TextAreaField name="description" label="Descripcion del proyecto" />
-          <ErrorMessage name="description" />
+          <InputTextField
+            name="title"
+            label="Nombre del proyecto"
+            error={!!errors.title}
+          />
+          <ErrorMessage
+            name="title"
+            render={(msg) => <div className="error">{msg}</div>}
+          />
+          <TextAreaField
+            name="description"
+            label="Descripcion del proyecto"
+            error={!!errors.description}
+          />
+          <ErrorMessage
+            name="description"
+            render={(msg) => <div className="error">{msg}</div>}
+          />
           <InputImageField
             name="images"
             label=""

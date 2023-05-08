@@ -11,7 +11,7 @@ import { v4 } from "uuid";
 import { uploadTempFile } from "../../services/firebase/ImageController";
 
 export default function CategoryForm({ onClose }: { onClose: () => void }) {
-  const [urlsReady, setUrlsReady] = useState(false)
+  const [urlsReady, setUrlsReady] = useState(false);
   const { newCategory } = useContext(CategoriesContext);
   const [urls, setUrls] = useState<string[]>([]);
 
@@ -26,22 +26,22 @@ export default function CategoryForm({ onClose }: { onClose: () => void }) {
 
   const categorySchema = Yup.object().shape({
     title: Yup.string()
-      .required("Titulo requerido")
-      .min(8, "Debe tener al menos 8 caracteres")
-      .max(30, "No debe tener mas de 30 caracteres")
+      .required("Campo requerido")
+      .min(8, "Debe contener un mínimo 8 caracteres")
+      .max(20, "Debe contener un máximo de 20 caracteres")
       .lowercase(),
     description: Yup.string()
-      .required("Se requiere una descripcion para la categoria")
-      .min(8)
-      .max(255),
+      .required("Campo requerido")
+      .min(8, "Debe contener un mínimo 8 caracteres")
+      .max(128, "Debe contener un máximo de 128 caracteres"),
     image: Yup.string().url(),
   });
 
-  const getUrls =  async (files: File[]) => {
-    const urls = await uploadTempFile(files)
+  const getUrls = async (files: File[]) => {
+    const urls = await uploadTempFile(files);
     setUrls(urls);
-    setUrlsReady(true)
-  }
+    setUrlsReady(true);
+  };
 
   return (
     <Formik
@@ -52,25 +52,41 @@ export default function CategoryForm({ onClose }: { onClose: () => void }) {
           id: v4(),
           title: values.title,
           description: values.description,
-          image: urls[0] || '',
+          image: urls[0] || "",
           subCategories: [],
           url: `/categories/${values.title.toLowerCase()}`,
         };
         resetForm();
         newCategory(category);
-        onClose()
+        onClose();
       }}
     >
-      {({ isSubmitting, errors, touched }) => (
+      {({ isSubmitting, errors }) => (
         <Form className="category-form">
-          <InputTextField name="title" label="Nombre de la categoria" />
-          {errors && touched && <ErrorMessage name="title" className="error" />}
+          <InputTextField
+            name="title"
+            label="Nombre de la categoria"
+            error={!!errors.title}
+          />
+          <ErrorMessage
+            name="title"
+            render={(msg) => <div className="error">{msg}</div>}
+          />
           <TextAreaField
             name="description"
             label="Descripción de la categoría"
+            error={!!errors.description}
           />
-          <ErrorMessage name="description" />
-          <InputImageField name="image" label="" multiple={false} getUrls={getUrls} />
+          <ErrorMessage
+            name="description"
+            render={(msg) => <div className="error">{msg}</div>}
+          />
+          <InputImageField
+            name="image"
+            label=""
+            multiple={false}
+            getUrls={getUrls}
+          />
           <SecondaryButton
             typeButton={TypeButton.SUBMIT}
             title="Agregar Categoria"

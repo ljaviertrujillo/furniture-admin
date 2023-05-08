@@ -6,14 +6,15 @@ import { useState } from "react";
 
 export default function TextAreaField({
   label,
+  error,
   ...props
-}: InputProps & { label: string }) {
+}: InputProps & { label: string, error: boolean }) {
   const [isFocused, setIsFocused] = useState(false);
   return (
     <Field name={props.name}>
       {({ field }: FieldProps) => (
         <div
-          className={classNames("form-floating textarea", isFocused ? "focused" : "")}
+          className={classNames("form-floating textarea", isFocused ? "focused" : "", error ? 'error' : '' )}
         >
           <textarea
             id={field.name}

@@ -1,0 +1,36 @@
+@import '../../styles/index.scss';
+
+.library-icons{
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    grid-template-rows: repeat(4, 1fr);
+    gap: .25rem;
+    overflow-y: auto;
+}
+
+.library-icons .icon{
+    color: $P-500;
+    padding: .5rem;
+    cursor: pointer;
+    width: 100%;
+    height: 100%;
+    border: 2px solid transparent;
+    border-radius: .5rem;
+    @include transition(border-color, color, box-shadow);
+
+    svg{
+        width: 100%;
+        height: 100%;
+    }
+
+    &:hover{
+        color: $P-800;
+        box-shadow: 0 0 5px $P-400;
+    }
+    &.selected{
+        color: $P-800;
+        border-color: $C-400;
+        box-shadow: 0 0 5px $P-400;
+    }
+
+}

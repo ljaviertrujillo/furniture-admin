@@ -119,6 +119,8 @@
   align-items: center;
   background-color: $P-900;
   border-radius: 0 0.5rem 0.5rem 0;
+  overflow: hidden;
+  white-space: nowrap;
   z-index: 1;
   .btn,
   .close,
@@ -156,5 +158,26 @@
         color: tomato;
       }
     }
+  }
+}
+
+.next-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 0.5rem;
+  background-color: $P-300;
+  backdrop-filter: blur(1px);
+  -webkit-backdrop-filter: blur(1px);
+  font-size: 2rem;
+  opacity: .9;
+  color: $P-400;
+  @include transition(opacity, color, background-color);
+  &:hover{
+    opacity: 1;
+    background-color: $P-100;
+    color: $S-500;
   }
 }

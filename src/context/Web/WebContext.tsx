@@ -33,6 +33,7 @@ export default function WebContextProvider({
 
   useEffect(() => {
     setIsFormVisible(false);
+    setIsOpen(true)
   }, [location]);
 
   return (

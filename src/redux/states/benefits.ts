@@ -1,20 +1,20 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { IProject } from "../../models";
+import { IBenefit } from "../../models";
 
-export interface ProjectState {
-  data: IProject[];
+export interface BenefitState {
+  data: IBenefit[];
   isLoading: boolean;
   error: string | null;
 }
 
-const initialState: ProjectState = {
+const initialState: BenefitState = {
   data: [],
   isLoading: false,
   error: null,
 };
 
-export const projectSlice = createSlice({
-  name: "project",
+export const benefitSlice = createSlice({
+  name: "benefit",
   initialState,
   reducers: {
     fetchStart: (state) => {
@@ -29,27 +29,33 @@ export const projectSlice = createSlice({
       state.isLoading = false;
       state.error = action.payload;
     },
-    addProject: (state, action) => {
+    addBenefit: (state, action) => {
       return {
         ...state,
         data: [...state.data, action.payload],
       };
     },
-    updateProject: (state, action) => {
+    updateBenefit: (state, action) => {
       return {
         ...state,
         data: [...state.data, ...action.payload],
       };
     },
-    removeProject: (state, action) => {
+    removeBenefit: (state, action) => {
       return {
         ...state,
-        data: state.data.filter(project => project !== action.payload)
-      }
+        data: state.data.filter((benefit) => benefit.id !== action.payload),
+      };
     },
   },
 });
 
-export const { fetchStart, fetchError, fetchSucess, addProject, removeProject, updateProject } = projectSlice.actions;
-
-export default projectSlice.reducer;
+export const {
+  fetchError,
+  fetchStart,
+  fetchSucess,
+  addBenefit,
+  updateBenefit,
+  removeBenefit,
+} = benefitSlice.actions;
+export default benefitSlice.reducer;
